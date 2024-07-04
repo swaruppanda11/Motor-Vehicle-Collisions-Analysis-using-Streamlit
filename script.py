@@ -25,7 +25,7 @@ injured_people = st.slider("Number of persons injured in Vehicle Collisions", 0,
 st.map(data.query("injured_persons >= @injured_people")[["latitude", "longitude"]].dropna(how = "any"))
 
 st.header("How many verhicle collisions occure during a given time of the day?")
-hour = st.sidebar.slider("Hour to look at", 0, 23)
+hour = st.slider("Hour to look at", 0, 23)
 data = data[data['date/time'].dt.hour == hour]
 
 
