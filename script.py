@@ -20,5 +20,16 @@ def load_data(nrows):
 
 data = load_data(100000)
 
-st.subheader('Raw Data')
-st.write(data)
+st.header("Where are the most people injured in NYC?")
+injured_people = st.slider("Number of persons injured in Vehicle Collisions", 0, 19)
+st.map(data.query("injured_persons >= @injured_people")[["latitude", "longitude"]].dropna(how = "any"))
+
+st.header("How many verhicle collisions occure during a given time of the day?")
+hour = st.sidebar.slider("Hour to look at", 0, 23)
+data = data[data['date/time'].dt.hour == hour]
+
+
+
+if st.checkbox("Show Raw Data", False):
+    st.subheader('Raw Data')
+    st.write(data)
